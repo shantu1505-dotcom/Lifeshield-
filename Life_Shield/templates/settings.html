@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LifeShield | Settings</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+
+        :root {
+            --blue: #28328c;
+            --teal: #00b5d1;
+            --bg: #f4f7fa;
+            --border: #e6edf3;
+            --text: #1a1c21;
+            --muted: #64748b;
+            --shadow: 0 10px 30px -5px rgba(0,0,0,0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text);
+        }
+
+        .app-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        aside {
+            width: 280px;
+            background: #fff;
+            border-right: 1px solid var(--border);
+            padding: 40px 24px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            flex-shrink: 0;
+        }
+
+        .brand-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--blue);
+            margin-bottom: 45px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo i {
+            color: var(--teal);
+        }
+
+        .nav-link-custom {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px 16px;
+            margin-bottom: 5px;
+
+            color: var(--muted);
+            text-decoration: none;
+
+            font-weight: 600;
+
+            border-radius: 12px;
+
+            transition: 0.25s;
+        }
+
+        .nav-link-custom:hover {
+            background: #f1f5f9;
+            color: var(--blue);
+        }
+
+        .nav-link-custom.active {
+            background: #eef2ff;
+            color: var(--blue);
+        }
+
+        .nav-link-custom i {
+            font-size: 1.1rem;
+        }
+
+        /* ================= MAIN ================= */
+
+        main {
+            flex: 1;
+            padding: 40px 60px;
+            width: 100%;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--blue);
+            margin: 0;
+        }
+
+        .page-subtitle {
+            color: var(--muted);
+            margin-top: 6px;
+            font-size: 0.95rem;
+        }
+
+        .back-btn {
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--blue);
+
+            padding: 10px 18px;
+            border-radius: 12px;
+
+            text-decoration: none;
+            font-weight: 700;
+
+            transition: 0.25s;
+        }
+
+        .back-btn:hover {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        /* ================= CARDS ================= */
+
+        .settings-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 28px;
+
+            margin-bottom: 25px;
+
+            box-shadow: var(--shadow);
+        }
+
+        .card-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+        .card-icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #eef2ff;
+            color: var(--blue);
+
+            font-size: 1.3rem;
+        }
+
+        .card-heading h4 {
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .card-heading p {
+            margin: 3px 0 0;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* ================= PROFILE ================= */
+
+        .profile-box {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+
+            padding: 20px;
+
+            background: #f8fafc;
+            border-radius: 16px;
+
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 65px;
+            height: 65px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                var(--blue),
+                var(--teal)
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .profile-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .profile-type {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        .form-control {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 0.9rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(0,181,209,0.1);
+        }
+
+        .save-btn {
+            background: var(--blue);
+            color: #fff;
+
+            border: none;
+            border-radius: 12px;
+
+            padding: 11px 22px;
+
+            font-weight: 700;
+
+            transition: 0.25s;
+        }
+
+        .save-btn:hover {
+            background: #20286f;
+            transform: translateY(-1px);
+        }
+
+        /* ================= BELT INFO ================= */
+
+        .belt-box {
+            background: linear-gradient(
+                135deg,
+                #eef2ff,
+                #f0fdfa
+            );
+
+            border-radius: 18px;
+            padding: 22px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .belt-title {
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .belt-id {
+            font-size: 1.4rem;
+            color: var(--blue);
+            font-weight: 800;
+            margin-top: 3px;
+        }
+
+        .connected-badge {
+            background: #dcfce7;
+            color: #15803d;
+
+            padding: 7px 12px;
+            border-radius: 20px;
+
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        /* ================= CONTACTS ================= */
+
+        .contact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 15px 16px;
+
+            border: 1px solid var(--border);
+            border-radius: 14px;
+
+            margin-bottom: 10px;
+
+            background: #fff;
+        }
+
+        .contact-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #fff1f2;
+            color: #e11d48;
+
+            border-radius: 11px;
+        }
+
+        .contact-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .contact-phone {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .delete-btn {
+            border: none;
+            background: #fff1f2;
+            color: #e11d48;
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            transition: 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: #ffe4e6;
+        }
+
+        .add-btn {
+            border: 1px dashed var(--teal);
+            background: #f0fdfa;
+
+            color: #0f766e;
+
+            width: 100%;
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            font-weight: 700;
+
+            margin-top: 8px;
+        }
+
+        .add-btn:hover {
+            background: #ccfbf1;
+        }
+
+        /* ================= STATUS ================= */
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .status-row:last-child {
+            border-bottom: none;
+        }
+
+        .status-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-label i {
+            color: var(--teal);
+            font-size: 1.15rem;
+        }
+
+        .status-value {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #15803d;
+        }
+
+        /* ================= LOGOUT ================= */
+
+        .logout-btn {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+            border-radius: 13px;
+
+            background: #fff1f2;
+            color: #be123c;
+
+            font-weight: 800;
+
+            transition: 0.25s;
+        }
+
+        .logout-btn:hover {
+            background: #ffe4e6;
+        }
+
+        /* ================= MOBILE HEADER ================= */
+
+        .mobile-header {
+            display: none;
+
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+
+            padding: 12px 18px;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 1000;
+
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-brand {
+            color: var(--blue);
+            font-weight: 800;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 992px) {
+
+            .mobile-header {
+                display: flex;
+            }
+
+            aside {
+                position: fixed;
+                left: -280px;
+                top: 0;
+
+                z-index: 2000;
+
+                transition: 0.3s;
+            }
+
+            aside.active {
+                transform: translateX(280px);
+            }
+
+            main {
+                padding: 25px 15px;
+            }
+
+            .page-header {
+                align-items: flex-start;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .settings-card {
+                padding: 20px;
+            }
+
+            .belt-box {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+
+        }
+
+        @media(max-width: 576px) {
+
+            .page-header {
+                display: block;
+            }
+
+            .back-btn {
+                display: inline-block;
+                margin-top: 15px;
+            }
+
+            .profile-box {
+                padding: 15px;
+            }
+
+            .profile-avatar {
+                width: 55px;
+                height: 55px;
+            }
+
+            .contact-item {
+                padding: 12px;
+            }
+
+        }
+
+        /* ================= OVERLAY ================= */
+
+        .overlay {
+            display: none;
+
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0,0,0,0.4);
+
+            z-index: 1500;
+
+            backdrop-filter: blur(3px);
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ================= MOBILE HEADER ================= -->
+
+<div class="mobile-header">
+
+    <button
+        class="btn border-0"
+        id="menuBtn"
+        style="font-size:1.5rem;">
+        ☰
+    </button>
+
+    <div class="mobile-brand">
+        LIFE<span style="color:var(--teal)">SHIELD</span>
+    </div>
+
+    <i class="bi bi-shield-check"
+       style="font-size:1.3rem;color:var(--teal);">
+    </i>
+
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+
+<div class="app-wrapper">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside id="sidebar">
+
+        <div class="brand-logo">
+
+            <i class="bi bi-shield-pulse"></i>
+
+            LIFESHIELD
+
+        </div>
+
+        <nav>
+
+            <a href="/dashboard"
+               class="nav-link-custom">
+
+                <i class="bi bi-grid-1x2"></i>
+
+                Dashboard
+
+            </a>
+
+            <a href="/settings"
+               class="nav-link-custom active">
+
+                <i class="bi bi-sliders"></i>
+
+                Settings
+
+            </a>
+
+            <a href="/logout"
+               class="nav-link-custom">
+
+                <i class="bi bi-box-arrow-right"></i>
+
+                Logout
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+        <div class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+
+                    Account Settings
+
+                </h1>
+
+                <div class="page-subtitle">
+
+                    Manage your LifeShield profile, emergency contacts and connected belt.
+
+                </div>
+
+            </div>
+
+            <a href="/dashboard"
+               class="back-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+        </div>
+
+
+        <!-- ================= PROFILE ================= -->
+
+        <div class="settings-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon">
+
+                    <i class="bi bi-person"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>Profile Information</h4>
+
+                    <p>Your registered LifeShield account information</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <div class="profile-avatar">
+
+                    {% if user_data and user_data.get('full_name') %}
+                        {{ user_data.get('full_name')[0]|upper }}
+                    {% else %}
+                        L
+                    {% endif %}
+
+                </div>
+
+                <div>
+
+                    <div class="profile-name">
+
+                        {% if user_data and user_data.get('full_name') %}
+                            {{ user_data.get('full_name') }}
+                        {% else %}
+                            LifeShield User
+                        {% endif %}
+
+                    </div>
+
+                    <div class="profile-type">
+
+                        {% if user_type == 'patient' %}
+                            Patient Account
+                        {% else %}
+                            Guardian Account
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        value="{{ user_data.get('full_name', '') }}"
+                        readonly>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Email Address
+
+                    </label>
+
+                    <input
+                        type="email"
+                        class="form-control"
+                        value="{{ user_data.get('email', user_data.get('guardian_email', '')) }}"
+                        readonly>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= PATIENT SETTINGS ================= -->
+
+        {% if user_type == 'patient' %}
+
+        <div class="settings-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon">
+
+                    <i class="bi bi-heart-pulse"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>Medical Information</h4>
+
+                    <p>Keep important medical information updated</p>
+
+                </div>
+
+            </div>
+
+
+            <form method="POST">
+
+                <label class="form-label">
+
+                    Medical Condition
+
+                </label>
+
+                <textarea
+                    name="medical_condition"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Example: Diabetes, hypertension, asthma, medication information...">{{ user_data.get('medical_condition', '') }}</textarea>
+
+                <div class="mt-3">
+
+                    <button type="submit"
+                            class="save-btn">
+
+                        <i class="bi bi-check2-circle"></i>
+
+                        Save Medical Information
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- ================= BELT ================= -->
+
+        {% if user_type == 'patient' %}
+
+        <div class="settings-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon">
+
+                    <i class="bi bi-watch"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>LifeShield Belt</h4>
+
+                    <p>Connected wearable device information</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="belt-box">
+
+                <div>
+
+                    <div class="belt-title">
+
+                        BELT / PATIENT ID
+
+                    </div>
+
+                    <div class="belt-id">
+
+                        {{ user_data.get('belt_id', 'Not assigned') }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="connected-badge">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                    REGISTERED
+
+                </div>
+
+            </div>
+
+            <div class="mt-3 text-muted small">
+
+                <i class="bi bi-info-circle"></i>
+
+                Your LifeShield belt sends health and emergency information
+                to the connected LifeShield system.
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- ================= EMERGENCY CONTACTS ================= -->
+
+        {% if user_type == 'patient' %}
+
+        <div class="settings-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon"
+                     style="background:#fff1f2;color:#e11d48;">
+
+                    <i class="bi bi-telephone"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>Emergency Contacts</h4>
+
+                    <p>People who should be contacted during an emergency</p>
+
+                </div>
+
+            </div>
+
+
+            <div id="contactsContainer">
+
+                {% if contacts %}
+
+                    {% for contact in contacts %}
+
+                    <div class="contact-item"
+                         id="contact-{{ contact.contact_id }}">
+
+                        <div class="contact-left">
+
+                            <div class="contact-icon">
+
+                                <i class="bi bi-person-fill"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="contact-name">
+
+                                    {{ contact.contact_name }}
+                                    {% if contact.relationship %}
+                                        <span class="text-muted" style="font-weight:400;font-size:0.8em;">({{ contact.relationship }})</span>
+                                    {% endif %}
+
+                                </div>
+
+                                <div class="contact-phone">
+
+                                    {{ contact.contact_phone }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="delete-btn"
+                            onclick="removeContact({{ contact.contact_id }})">
+
+                            <i class="bi bi-trash"></i>
+
+                        </button>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="text-center py-4 text-muted">
+
+                        <i class="bi bi-person-plus"
+                           style="font-size:2rem;">
+                        </i>
+
+                        <div class="mt-2">
+
+                            No emergency contacts added yet.
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <button
+                type="button"
+                class="add-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#addContactModal">
+
+                <i class="bi bi-plus-circle"></i>
+
+                Add Emergency Contact
+
+            </button>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- ================= SYSTEM STATUS ================= -->
+
+        <div class="settings-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon"
+                     style="background:#f0fdfa;color:#0d9488;">
+
+                    <i class="bi bi-activity"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>System Status</h4>
+
+                    <p>LifeShield service connection status</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-row">
+
+                <div class="status-label">
+
+                    <i class="bi bi-database-check"></i>
+
+                    Database Connection
+
+                </div>
+
+                <div class="status-value">
+
+                    Connected
+
+                </div>
+
+            </div>
+
+
+            <div class="status-row">
+
+                <div class="status-label">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    LifeShield Protection
+
+                </div>
+
+                <div class="status-value">
+
+                    Active
+
+                </div>
+
+            </div>
+
+
+            {% if user_type == 'patient' %}
+
+            <div class="status-row">
+
+                <div class="status-label">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    GPS Monitoring
+
+                </div>
+
+                <div class="status-value">
+
+                    Available
+
+                </div>
+
+            </div>
+
+            <div class="status-row">
+
+                <div class="status-label">
+
+                    <i class="bi bi-bell"></i>
+
+                    Emergency Alerts
+
+                </div>
+
+                <div class="status-value">
+
+                    Enabled
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ================= LOGOUT ================= -->
+
+        <div class="settings-card">
+
+            <div class="card-heading">
+
+                <div class="card-icon"
+                     style="background:#fff1f2;color:#be123c;">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>Account</h4>
+
+                    <p>End your current LifeShield session</p>
+
+                </div>
+
+            </div>
+
+
+            <a href="/logout"
+               style="text-decoration:none;">
+
+                <button class="logout-btn">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                    Logout from LifeShield
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- ================= ADD CONTACT MODAL ================= -->
+
+<div class="modal fade"
+     id="addContactModal"
+     tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content"
+             style="border:none;border-radius:20px;overflow:hidden;">
+
+            <div class="modal-header"
+                 style="background:var(--blue);color:#fff;">
+
+                <h5 class="modal-title fw-bold">
+
+                    <i class="bi bi-person-plus"></i>
+
+                    Add Emergency Contact
+
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+
+            <div class="modal-body p-4">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Contact Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contactName"
+                        class="form-control"
+                        placeholder="Example: Mother">
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Phone Number
+
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="contactPhone"
+                        class="form-control"
+                        placeholder="Example: 9876543210">
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Relationship <span class="text-muted">(optional)</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contactRelationship"
+                        class="form-control"
+                        placeholder="Example: Mother, Father, Guardian">
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Email <span class="text-muted">(optional)</span>
+
+                    </label>
+
+                    <input
+                        type="email"
+                        id="contactEmail"
+                        class="form-control"
+                        placeholder="Example: mother@example.com">
+
+                </div>
+
+
+                <div id="contactError"
+                     class="alert alert-danger d-none">
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer border-0 p-4 pt-0">
+
+                <button
+                    type="button"
+                    class="btn btn-light"
+                    data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="button"
+                    class="save-btn"
+                    onclick="addContact()">
+
+                    <i class="bi bi-plus-circle"></i>
+
+                    Add Contact
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    /* ================= MOBILE SIDEBAR ================= */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+
+    if (menuBtn) {
+
+        menuBtn.addEventListener("click", function () {
+
+            sidebar.classList.add("active");
+            overlay.classList.add("active");
+
+        });
+
+    }
+
+    if (overlay) {
+
+        overlay.addEventListener("click", function () {
+
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+
+        });
+
+    }
+
+
+    /* ================= ADD CONTACT ================= */
+
+    async function addContact() {
+
+        const name =
+            document.getElementById("contactName")
+            .value
+            .trim();
+
+        const phone =
+            document.getElementById("contactPhone")
+            .value
+            .trim();
+
+        const relationship =
+            document.getElementById("contactRelationship")
+            .value
+            .trim();
+
+        const email =
+            document.getElementById("contactEmail")
+            .value
+            .trim();
+
+        const errorBox =
+            document.getElementById("contactError");
+
+
+        errorBox.classList.add("d-none");
+
+
+        if (!name || !phone) {
+
+            errorBox.textContent =
+                "Please enter both contact name and phone number.";
+
+            errorBox.classList.remove("d-none");
+
+            return;
+
+        }
+
+
+        try {
+
+            const response = await fetch(
+                "/add_guardian",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        name: name,
+                        phone: phone,
+                        relationship: relationship,
+                        email: email
+                    })
+                }
+            );
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok ||
+                result.status !== "success") {
+
+                throw new Error(
+                    result.message ||
+                    "Unable to add contact."
+                );
+
+            }
+
+
+            location.reload();
+
+
+        } catch (error) {
+
+            errorBox.textContent =
+                error.message;
+
+            errorBox.classList.remove("d-none");
+
+        }
+
+    }
+
+
+    /* ================= REMOVE CONTACT ================= */
+
+    async function removeContact(contactId) {
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to remove this emergency contact?"
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/remove_guardian/" + contactId,
+                    {
+                        method: "DELETE"
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok ||
+                result.status !== "success") {
+
+                throw new Error(
+                    result.message ||
+                    "Unable to remove contact."
+                );
+
+            }
+
+
+            const element =
+                document.getElementById(
+                    "contact-" + contactId
+                );
+
+
+            if (element) {
+
+                element.remove();
+
+            }
+
+
+        } catch (error) {
+
+            alert(
+                "Error removing contact: " +
+                error.message
+            );
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

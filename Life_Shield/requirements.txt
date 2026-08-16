@@ -1,0 +1,9 @@
+Flask
+Flask-MySQLdb
+Werkzeug
+requests
+google-auth
+twilio
+python-dotenv
+
+pywebpush>=2.0.0

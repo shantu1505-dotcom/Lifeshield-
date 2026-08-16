@@ -1,0 +1,729 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LifeShield | Patient Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+
+        :root {
+            --blue: #28328c;
+            --teal: #00b5d1;
+            --dark: #172033;
+            --muted: #64748b;
+            --background: #f4f7fa;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background:
+                radial-gradient(circle at top left,
+                rgba(0,181,209,0.10),
+                transparent 35%),
+                radial-gradient(circle at bottom right,
+                rgba(40,50,140,0.10),
+                transparent 35%),
+                var(--background);
+            color: var(--dark);
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .topbar {
+            height: 74px;
+            background: rgba(255,255,255,0.92);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            backdrop-filter: blur(10px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--blue);
+            font-weight: 800;
+            font-size: 1.35rem;
+            letter-spacing: -0.5px;
+        }
+
+        .brand i {
+            color: var(--teal);
+            font-size: 1.65rem;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .home-link:hover {
+            color: var(--blue);
+        }
+
+        /* ================= MAIN ================= */
+
+        .login-wrapper {
+            min-height: calc(100vh - 74px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 1050px;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 25px 70px rgba(15,23,42,0.10);
+            border: 1px solid rgba(226,232,240,0.8);
+        }
+
+        /* ================= LEFT ================= */
+
+        .login-info {
+            padding: 55px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #eefcff,
+                    #f5f7ff
+                );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-info::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(0,181,209,0.08);
+            right: -100px;
+            bottom: -100px;
+        }
+
+        .shield-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: var(--teal);
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(0,181,209,0.12);
+            margin-bottom: 28px;
+        }
+
+        .login-info h1 {
+            font-size: 2.35rem;
+            line-height: 1.15;
+            font-weight: 800;
+            color: var(--blue);
+            margin-bottom: 18px;
+        }
+
+        .login-info h1 span {
+            color: var(--teal);
+        }
+
+        .login-info > p {
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 440px;
+            margin-bottom: 30px;
+        }
+
+        /* FEATURES */
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 17px;
+        }
+
+        .feature-icon {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            border-radius: 13px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue);
+            box-shadow: 0 5px 15px rgba(15,23,42,0.06);
+        }
+
+        .feature-text strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .feature-text small {
+            color: var(--muted);
+        }
+
+        /* ================= RIGHT ================= */
+
+        .login-form-section {
+            padding: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-heading {
+            margin-bottom: 30px;
+        }
+
+        .login-heading h2 {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .login-heading p {
+            color: var(--muted);
+            margin: 0;
+            font-size: 0.92rem;
+        }
+
+        /* FLASH MESSAGES */
+
+        .alert {
+            border-radius: 13px;
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        /* FORM */
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        .input-group-text {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-right: none;
+            color: var(--muted);
+            padding-left: 15px;
+        }
+
+        .form-control {
+            height: 52px;
+            border: 1px solid var(--border);
+            border-left: none;
+            font-size: 0.92rem;
+            box-shadow: none !important;
+        }
+
+        .form-control:focus {
+            border-color: var(--teal);
+        }
+
+        .password-toggle {
+            border: 1px solid var(--border);
+            border-left: none;
+            background: white;
+            color: var(--muted);
+            cursor: pointer;
+            padding-right: 15px;
+        }
+
+        .password-toggle:hover {
+            color: var(--blue);
+        }
+
+        /* LOGIN BUTTON */
+
+        .btn-login {
+            width: 100%;
+            height: 54px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(
+                135deg,
+                var(--blue),
+                #3947b8
+            );
+            color: white;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 25px rgba(40,50,140,0.20);
+            transition: 0.25s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(40,50,140,0.25);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        /* REGISTER */
+
+        .register-box {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .register-box a {
+            color: var(--blue);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register-box a:hover {
+            color: var(--teal);
+        }
+
+        /* SECURITY */
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            color: #64748b;
+            font-size: 0.76rem;
+            margin-top: 18px;
+        }
+
+        .security-note i {
+            color: #16a34a;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 850px) {
+
+            .login-container {
+                grid-template-columns: 1fr;
+                max-width: 560px;
+            }
+
+            .login-info {
+                padding: 38px 30px;
+            }
+
+            .login-info h1 {
+                font-size: 1.9rem;
+            }
+
+            .login-form-section {
+                padding: 38px 30px;
+            }
+
+            .feature {
+                margin-bottom: 13px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .brand {
+                font-size: 1.15rem;
+            }
+
+            .home-link {
+                font-size: 0.85rem;
+            }
+
+            .login-wrapper {
+                padding: 25px 12px;
+            }
+
+            .login-container {
+                border-radius: 22px;
+            }
+
+            .login-info {
+                padding: 30px 23px;
+            }
+
+            .login-form-section {
+                padding: 30px 23px;
+            }
+
+            .login-info h1 {
+                font-size: 1.7rem;
+            }
+
+            .login-heading h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ================= TOP BAR ================= -->
+
+<header class="topbar">
+
+    <a href="/" class="brand">
+        <i class="bi bi-shield-pulse-fill"></i>
+        LIFE<span style="color:var(--teal)">SHIELD</span>
+    </a>
+
+    <a href="/" class="home-link">
+        <i class="bi bi-arrow-left"></i>
+        Back to Home
+    </a>
+
+</header>
+
+
+<!-- ================= LOGIN AREA ================= -->
+
+<main class="login-wrapper">
+
+    <div class="login-container">
+
+        <!-- ================= LEFT INFORMATION ================= -->
+
+        <section class="login-info">
+
+            <div class="shield-icon">
+                <i class="bi bi-person-heart"></i>
+            </div>
+
+            <h1>
+                Welcome back to
+                <span>LifeShield.</span>
+            </h1>
+
+            <p>
+                Sign in to access your personal health dashboard,
+                monitor your LifeShield belt data and manage your
+                emergency protection system.
+            </p>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    <i class="bi bi-heart-pulse"></i>
+                </div>
+
+                <div class="feature-text">
+                    <strong>Live Health Monitoring</strong>
+                    <small>Track your vital signs in real time.</small>
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+
+                <div class="feature-text">
+                    <strong>Emergency Protection</strong>
+                    <small>Stay protected with automated alerts.</small>
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    <i class="bi bi-geo-alt"></i>
+                </div>
+
+                <div class="feature-text">
+                    <strong>Location Assistance</strong>
+                    <small>Access your location during emergencies.</small>
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    <i class="bi bi-hospital"></i>
+                </div>
+
+                <div class="feature-text">
+                    <strong>Hospital Assistance</strong>
+                    <small>Find the nearest registered hospital.</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= LOGIN FORM ================= -->
+
+        <section class="login-form-section">
+
+            <div class="login-heading">
+
+                <h2>Patient Login</h2>
+
+                <p>
+                    Enter your registered account details to continue.
+                </p>
+
+            </div>
+
+
+            <!-- FLASH MESSAGES -->
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div class="alert
+                            {% if category == 'success' %}
+                                alert-success
+                            {% else %}
+                                alert-danger
+                            {% endif %}
+                            d-flex align-items-center">
+
+                            <i class="bi
+                                {% if category == 'success' %}
+                                    bi-check-circle-fill
+                                {% else %}
+                                    bi-exclamation-triangle-fill
+                                {% endif %}
+                                me-2">
+                            </i>
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- LOGIN FORM -->
+
+            <form method="POST" action="/login">
+
+                <!-- EMAIL -->
+
+                <label class="form-label">
+                    Email ID
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="Enter your registered email"
+                        required
+                        autocomplete="email"
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <label class="form-label">
+                    Password
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">
+                        <i class="bi bi-lock"></i>
+                    </span>
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="togglePassword"
+                        aria-label="Show password">
+
+                        <i class="bi bi-eye" id="eyeIcon"></i>
+
+                    </button>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="btn-login">
+
+                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                    Continue to Patient Dashboard
+
+                </button>
+
+            </form>
+
+
+            <!-- REGISTER -->
+
+            <div class="register-box">
+
+                <div>
+                    New to LifeShield?
+                </div>
+
+                <a href="/register/patient">
+
+                    Create Patient Account
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <!-- SECURITY -->
+
+            <div class="security-note">
+
+                <i class="bi bi-shield-lock-fill"></i>
+
+                Your account information is protected.
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    const eyeIcon =
+        document.getElementById("eyeIcon");
+
+
+    togglePassword.addEventListener("click", function () {
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            eyeIcon.classList.remove("bi-eye");
+
+            eyeIcon.classList.add("bi-eye-slash");
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        } else {
+
+            passwordInput.type = "password";
+
+            eyeIcon.classList.remove("bi-eye-slash");
+
+            eyeIcon.classList.add("bi-eye");
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+```

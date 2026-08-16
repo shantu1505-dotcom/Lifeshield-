@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LifeShield | Patient Registration</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+
+        :root {
+            --practo-blue: #28328c;
+            --practo-teal: #00b5d1;
+            --bg-body: #f4f7fa;
+            --border-subtle: #e6edf3;
+            --text-dark: #1a1c21;
+            --text-muted: #64748b;
+            --success: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top right, rgba(0,181,209,0.10), transparent 30%),
+                radial-gradient(circle at bottom left, rgba(40,50,140,0.08), transparent 35%),
+                var(--bg-body);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-dark);
+        }
+
+        /* ==============================
+           TOP NAVBAR
+        ============================== */
+
+        .topbar {
+            height: 76px;
+            background: rgba(255,255,255,0.96);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+        }
+
+        .brand {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--practo-blue);
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand i {
+            color: var(--practo-teal);
+            font-size: 1.7rem;
+        }
+
+        .brand span {
+            color: var(--practo-teal);
+        }
+
+        .back-home {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: 0.25s;
+        }
+
+        .back-home:hover {
+            color: var(--practo-blue);
+        }
+
+        /* ==============================
+           MAIN LAYOUT
+        ============================== */
+
+        .page-container {
+            width: 92%;
+            max-width: 1250px;
+            margin: 45px auto;
+        }
+
+        .registration-layout {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 35px;
+            align-items: stretch;
+        }
+
+        /* ==============================
+           LEFT INFORMATION PANEL
+        ============================== */
+
+        .info-panel {
+            background: linear-gradient(
+                145deg,
+                var(--practo-blue),
+                #3544a5
+            );
+            border-radius: 30px;
+            padding: 45px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 690px;
+            box-shadow: 0 20px 45px rgba(40,50,140,0.18);
+        }
+
+        .info-panel::before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            top: -100px;
+            right: -80px;
+        }
+
+        .info-panel::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(0,181,209,0.12);
+            bottom: -80px;
+            left: -70px;
+        }
+
+        .info-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .shield-icon {
+            width: 62px;
+            height: 62px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.13);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+
+        .info-panel h1 {
+            font-size: 2.45rem;
+            line-height: 1.15;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .info-panel h1 span {
+            color: #55e1f0;
+        }
+
+        .info-panel > .info-content > p {
+            color: rgba(255,255,255,0.78);
+            line-height: 1.7;
+            font-size: 0.98rem;
+            margin-bottom: 35px;
+        }
+
+        /* ==============================
+           HOW IT WORKS
+        ============================== */
+
+        .steps {
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .step-number {
+            min-width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.13);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #55e1f0;
+        }
+
+        .step-content h6 {
+            margin: 0 0 5px;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .step-content p {
+            margin: 0;
+            color: rgba(255,255,255,0.68);
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        /* ==============================
+           BELT IMAGE AREA
+        ============================== */
+
+        .belt-visual {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.08);
+            text-align: center;
+        }
+
+        .belt-visual img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+        .belt-caption {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.75rem;
+            margin-top: 10px;
+        }
+
+        /* ==============================
+           REGISTRATION CARD
+        ============================== */
+
+        .register-card {
+            background: white;
+            border: 1px solid var(--border-subtle);
+            border-radius: 30px;
+            padding: 45px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+        }
+
+        .register-header {
+            margin-bottom: 30px;
+        }
+
+        .register-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--practo-blue);
+            margin-bottom: 8px;
+        }
+
+        .register-header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ==============================
+           FORM
+        ============================== */
+
+        .form-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1rem;
+            z-index: 2;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 50px;
+            border-radius: 13px;
+            border: 1px solid #dbe3ea;
+            padding-left: 45px;
+            font-size: 0.9rem;
+            transition: 0.25s;
+            box-shadow: none !important;
+        }
+
+        textarea.form-control {
+            padding-left: 16px;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--practo-teal);
+            box-shadow: 0 0 0 3px rgba(0,181,209,0.10) !important;
+        }
+
+        .field-help {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+
+        /* ==============================
+           BELT ID NOTICE
+        ============================== */
+
+        .belt-notice {
+            background: #f0fdfa;
+            border: 1px solid #c7f3ec;
+            border-radius: 15px;
+            padding: 14px 16px;
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .belt-notice i {
+            color: #0d9488;
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        .belt-notice strong {
+            display: block;
+            color: #115e59;
+            font-size: 0.82rem;
+            margin-bottom: 3px;
+        }
+
+        .belt-notice p {
+            margin: 0;
+            color: #347b76;
+            font-size: 0.73rem;
+            line-height: 1.5;
+        }
+
+        /* ==============================
+           PASSWORD
+        ============================== */
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #94a3b8;
+            z-index: 3;
+        }
+
+        .password-wrapper .form-control {
+            padding-right: 45px;
+        }
+
+        /* ==============================
+           REGISTER BUTTON
+        ============================== */
+
+        .btn-register {
+            width: 100%;
+            min-height: 52px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(
+                135deg,
+                var(--practo-blue),
+                #3e4db0
+            );
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(40,50,140,0.18);
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(40,50,140,0.25);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 22px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .login-link a {
+            color: var(--practo-blue);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ==============================
+           SECURITY NOTE
+        ============================== */
+
+        .security-note {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 0.72rem;
+        }
+
+        .security-note i {
+            color: var(--success);
+        }
+
+        /* ==============================
+           FLASH MESSAGES
+        ============================== */
+
+        .alert {
+            border-radius: 13px;
+            border: none;
+            font-size: 0.82rem;
+            margin-bottom: 20px;
+        }
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 992px) {
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .page-container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .registration-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .info-panel {
+                min-height: auto;
+                padding: 32px;
+            }
+
+            .register-card {
+                padding: 30px;
+            }
+
+            .info-panel h1 {
+                font-size: 2rem;
+            }
+
+            .belt-visual {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .topbar {
+                height: 65px;
+            }
+
+            .brand {
+                font-size: 1.2rem;
+            }
+
+            .brand i {
+                font-size: 1.4rem;
+            }
+
+            .back-home {
+                font-size: 0.78rem;
+            }
+
+            .page-container {
+                margin: 15px auto 30px;
+            }
+
+            .info-panel,
+            .register-card {
+                border-radius: 22px;
+                padding: 24px;
+            }
+
+            .info-panel h1 {
+                font-size: 1.75rem;
+            }
+
+            .register-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .step {
+                margin-bottom: 17px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- ==============================
+     TOP BAR
+============================== -->
+
+<header class="topbar">
+
+    <a href="/" class="brand">
+        <i class="bi bi-shield-pulse"></i>
+        LIFE<span>SHIELD</span>
+    </a>
+
+    <a href="/" class="back-home">
+        <i class="bi bi-arrow-left"></i>
+        Back to Home
+    </a>
+
+</header>
+
+
+<!-- ==============================
+     MAIN
+============================== -->
+
+<div class="page-container">
+
+    <div class="registration-layout">
+
+        <!-- ==========================================
+             LEFT INFORMATION PANEL
+        =========================================== -->
+
+        <section class="info-panel">
+
+            <div class="info-content">
+
+                <div class="shield-icon">
+                    <i class="bi bi-person-heart"></i>
+                </div>
+
+                <h1>
+                    Create your<br>
+                    <span>LifeShield</span> account.
+                </h1>
+
+                <p>
+                    Register your LifeShield belt and connect it with
+                    your personal monitoring dashboard. Your vital
+                    information can then be monitored in real time.
+                </p>
+
+
+                <!-- HOW IT WORKS -->
+
+                <div class="steps">
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            1
+                        </div>
+
+                        <div class="step-content">
+
+                            <h6>Register your account</h6>
+
+                            <p>
+                                Enter your personal information and
+                                create your secure LifeShield account.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            2
+                        </div>
+
+                        <div class="step-content">
+
+                            <h6>Connect your LifeShield Belt</h6>
+
+                            <p>
+                                Your Belt ID identifies the wearable
+                                device associated with your account.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            3
+                        </div>
+
+                        <div class="step-content">
+
+                            <h6>Wear the belt correctly</h6>
+
+                            <p>
+                                Position the belt securely around the
+                                waist so the sensors can monitor the user.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            4
+                        </div>
+
+                        <div class="step-content">
+
+                            <h6>Start monitoring</h6>
+
+                            <p>
+                                After login, the dashboard can display
+                                vitals, GPS information and emergency
+                                events from the connected system.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BELT IMAGE -->
+
+                <div class="belt-visual">
+
+                    <img
+                        src="{{ url_for('static', filename='images/patient_feed.png') }}"
+                        alt="LifeShield wearable monitoring system"
+                    >
+
+                    <div class="belt-caption">
+                        LifeShield wearable monitoring system
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             RIGHT REGISTRATION FORM
+        =========================================== -->
+
+        <section class="register-card">
+
+            <div class="register-header">
+
+                <h2>Patient Registration</h2>
+
+                <p>
+                    Create your LifeShield patient account to begin
+                    using the monitoring system.
+                </p>
+
+            </div>
+
+
+            <!-- BELT ID INFORMATION -->
+
+            <div class="belt-notice">
+
+                <i class="bi bi-info-circle-fill"></i>
+
+                <div>
+
+                    <strong>
+                        Have your LifeShield Belt ID ready
+                    </strong>
+
+                    <p>
+                        Enter the unique Belt ID assigned to your
+                        wearable device. Example: LS001.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FLASH MESSAGES -->
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div class="alert alert-{{ category }}">
+
+                            <i class="bi bi-info-circle me-2"></i>
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- REGISTRATION FORM -->
+
+            <form method="POST"
+                  action="{{ url_for('register_patient') }}"
+                  autocomplete="off">
+
+
+                <!-- BELT ID -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Patient ID / Belt ID
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-upc-scan"></i>
+
+                        <input
+                            type="text"
+                            name="patient_id"
+                            class="form-control"
+                            placeholder="Example: LS001"
+                            maxlength="50"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="field-help">
+                        Enter the ID printed/assigned to your LifeShield belt.
+                    </div>
+
+                </div>
+
+
+                <!-- FULL NAME -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Full Name
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-person"></i>
+
+                        <input
+                            type="text"
+                            name="full_name"
+                            class="form-control"
+                            placeholder="Enter patient's full name"
+                            maxlength="100"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-envelope"></i>
+
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="patient@example.com"
+                            maxlength="100"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="field-help">
+                        This email will be used to log in to LifeShield.
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-lock"></i>
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                class="form-control"
+                                placeholder="Create a secure password"
+                                minlength="6"
+                                required
+                            >
+
+                        </div>
+
+                        <i
+                            class="bi bi-eye toggle-password"
+                            id="togglePassword"
+                        ></i>
+
+                    </div>
+
+                    <div class="field-help">
+                        Use at least 6 characters.
+                    </div>
+
+                </div>
+
+
+                <!-- MEDICAL CONDITION -->
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Medical Condition
+                        <span class="text-muted fw-normal">
+                            (Optional)
+                        </span>
+                    </label>
+
+                    <textarea
+                        name="medical_condition"
+                        class="form-control"
+                        placeholder="Example: Diabetes, hypertension, asthma, or None"
+                    ></textarea>
+
+                    <div class="field-help">
+                        This information can help provide relevant context
+                        during an emergency.
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="btn-register"
+                >
+
+                    <i class="bi bi-person-plus-fill me-2"></i>
+
+                    Create Patient Account
+
+                </button>
+
+
+            </form>
+
+
+            <!-- LOGIN LINK -->
+
+            <div class="login-link">
+
+                Already have a LifeShield account?
+
+                <a href="{{ url_for('login') }}">
+                    Login here
+                </a>
+
+            </div>
+
+
+            <!-- SECURITY -->
+
+            <div class="security-note">
+
+                <i class="bi bi-shield-lock-fill"></i>
+
+                Your account credentials are securely protected.
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     JAVASCRIPT
+============================== -->
+
+<script>
+
+    /* ==============================
+       PASSWORD VISIBILITY
+    ============================== */
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+
+    togglePassword.addEventListener("click", function () {
+
+        const type =
+            passwordInput.getAttribute("type") === "password"
+                ? "text"
+                : "password";
+
+        passwordInput.setAttribute("type", type);
+
+        this.classList.toggle("bi-eye");
+
+        this.classList.toggle("bi-eye-slash");
+
+    });
+
+
+    /* ==============================
+       BELT ID NORMALIZATION
+    ============================== */
+
+    const beltInput =
+        document.querySelector('input[name="patient_id"]');
+
+    beltInput.addEventListener("input", function () {
+
+        this.value =
+            this.value
+                .toUpperCase()
+                .replace(/\s/g, "");
+
+    });
+
+</script>
+
+</body>
+</html>

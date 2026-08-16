@@ -1,0 +1,14 @@
+{
+  "name": "lifeshield-call-service",
+  "version": "1.0.0",
+  "description": "Small Node.js/Express microservice that triggers Twilio emergency phone calls for LifeShield.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "twilio": "^5.3.0",
+    "dotenv": "^16.4.5"
+  }
+}

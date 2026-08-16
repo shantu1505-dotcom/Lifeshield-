@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LifeShield | Patient Safety & Emergency Monitoring</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+
+        :root {
+            --primary: #28328c;
+            --secondary: #00b5d1;
+            --dark: #172033;
+            --text: #475569;
+            --light: #f5f8fc;
+            --white: #ffffff;
+            --border: #e5eaf1;
+            --shadow: 0 15px 40px rgba(15, 23, 42, 0.07);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .brand i {
+            color: var(--secondary);
+            font-size: 1.7rem;
+        }
+
+        .nav-link {
+            color: #64748b !important;
+            font-weight: 600;
+            margin: 0 8px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .btn-login {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 9px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .btn-login:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary-custom {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 13px;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .btn-primary-custom:hover {
+            background: #202872;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            padding: 11px 23px;
+            border-radius: 13px;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            padding: 85px 0 75px;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(0,181,209,0.12), transparent 30%),
+                radial-gradient(circle at 15% 80%, rgba(40,50,140,0.08), transparent 30%),
+                white;
+        }
+
+        .hero-content {
+            padding-top: 20px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #eef7ff;
+            color: var(--primary);
+            padding: 8px 14px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.4rem;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: var(--primary);
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+        }
+
+        .hero-description {
+            color: var(--text);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            max-width: 620px;
+            margin-top: 20px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 13px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            background: linear-gradient(145deg, #eefaff, #f5f7ff);
+            border-radius: 35px;
+            min-height: 470px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .belt-image {
+            width: 100%;
+            max-width: 560px;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 25px;
+        }
+
+        /* ================= SECTION ================= */
+
+        section {
+            padding: 85px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--text);
+            max-width: 680px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        /* ================= HOW IT WORKS ================= */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .step-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 30px 22px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: 0.25s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+            background: #eef3ff;
+            color: var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .step-card h5 {
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: var(--text);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about-box {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .about-box h3 {
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .about-box p {
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* ================= REGISTRATION ================= */
+
+        .registration-section {
+            background: white;
+        }
+
+        .registration-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 30px;
+            height: 100%;
+        }
+
+        .registration-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        .registration-card h5 {
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .registration-card p {
+            color: var(--text);
+            line-height: 1.65;
+            font-size: 0.92rem;
+        }
+
+        /* ================= BELT ================= */
+
+        .belt-section {
+            background: #f3f8fc;
+        }
+
+        .belt-info {
+            background: white;
+            border-radius: 30px;
+            padding: 45px;
+            box-shadow: var(--shadow);
+        }
+
+        .belt-info h3 {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .belt-list {
+            padding: 0;
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .belt-list li {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 12px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .belt-list i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .important-box {
+            margin-top: 25px;
+            background: #fff8e7;
+            border-left: 5px solid #f59e0b;
+            padding: 18px;
+            border-radius: 12px;
+            color: #6b4e00;
+        }
+
+        /* ================= TECHNOLOGY ================= */
+
+        .technology-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tech-item {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 25px 20px;
+            border-radius: 20px;
+            min-width: 150px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .tech-item i {
+            font-size: 2rem;
+            color: var(--secondary);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .tech-item strong {
+            color: var(--primary);
+        }
+
+        .tech-arrow {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        /* ================= MONITORING ================= */
+
+        .monitor-card {
+            background: white;
+            border-radius: 22px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            height: 100%;
+        }
+
+        .monitor-icon {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            background: #eef7ff;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 18px;
+        }
+
+        .monitor-card h5 {
+            font-weight: 800;
+        }
+
+        .monitor-card p {
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        /* ================= EMERGENCY ================= */
+
+        .emergency-section {
+            background: linear-gradient(135deg, #28328c, #1e286e);
+            color: white;
+        }
+
+        .emergency-section .section-title h2 {
+            color: white;
+        }
+
+        .emergency-section .section-title p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .emergency-card {
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 22px;
+            padding: 28px;
+            height: 100%;
+            backdrop-filter: blur(5px);
+        }
+
+        .emergency-card i {
+            font-size: 2rem;
+            color: #67e8f9;
+            margin-bottom: 15px;
+        }
+
+        .emergency-card h5 {
+            font-weight: 800;
+        }
+
+        .emergency-card p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ================= HOSPITAL ================= */
+
+        .hospital-box {
+            background: white;
+            border-radius: 28px;
+            padding: 45px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .hospital-icon {
+            font-size: 3.5rem;
+            color: var(--secondary);
+        }
+
+        .hospital-box h3 {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .hospital-box p {
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* ================= FAQ ================= */
+
+        .accordion-item {
+            border: 1px solid var(--border);
+            border-radius: 14px !important;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            font-weight: 700;
+            color: var(--primary);
+            padding: 20px;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: #f2f6ff;
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .accordion-body {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            padding: 70px 0;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #eefaff, #eef1ff);
+            border-radius: 30px;
+            padding: 55px 30px;
+            text-align: center;
+        }
+
+        .cta-box h2 {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .cta-box p {
+            color: var(--text);
+            margin: 15px auto 25px;
+            max-width: 650px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #111827;
+            color: white;
+            padding: 45px 0 25px;
+        }
+
+        .footer-brand {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .footer-text {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-width: 500px;
+            margin-top: 12px;
+        }
+
+        .disclaimer {
+            margin-top: 30px;
+            padding: 18px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin-top: 30px;
+            padding-top: 20px;
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 992px) {
+
+            .hero {
+                padding: 55px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-visual {
+                margin-top: 30px;
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .navbar {
+                padding: 12px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.15rem;
+            }
+
+            .hero-description {
+                font-size: 0.92rem;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-box,
+            .belt-info,
+            .hospital-box {
+                padding: 28px 22px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons a {
+                text-align: center;
+                width: 100%;
+            }
+
+            .tech-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+
+        <a href="/" class="brand">
+            <i class="bi bi-shield-plus"></i>
+            LIFE<span style="color:var(--secondary)">SHIELD</span>
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#how-it-works">How It Works</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#registration">Registration</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#belt">Belt Guide</a>
+                </li>
+
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                    <a href="/login" class="btn-login">
+                        Patient Login
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+                        <i class="bi bi-shield-check"></i>
+                        Smart Patient Safety System
+                    </div>
+
+                    <h1>
+                        Stay Connected.
+                        <span>Stay Protected.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        LifeShield is a wearable health and emergency
+                        monitoring system designed to help patients stay
+                        connected with their monitoring platform during
+                        important and potentially critical situations.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="/login" class="btn-primary-custom">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            Patient Login
+                        </a>
+
+                        <a href="/register/patient" class="btn-outline-custom">
+                            <i class="bi bi-person-plus"></i>
+                            Register as Patient
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="hero-visual">
+
+                    <!--
+                        Put your generated image here:
+
+                        static/images/lifeshield_belt.png
+
+                        The image should show the LifeShield wearable belt
+                        used around the waist/abdomen.
+                    -->
+
+                    <img
+                        src="{{ url_for('static', filename='images/lifeshield_belt.png') }}"
+                        alt="LifeShield wearable belt for waist monitoring"
+                        class="belt-image"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section id="about">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>What is LifeShield?</h2>
+
+            <p>
+                A connected wearable system designed to assist with
+                patient monitoring, location awareness and emergency
+                response.
+            </p>
+
+        </div>
+
+
+        <div class="about-box">
+
+            <h3>
+                A smarter way to stay connected with patient safety.
+            </h3>
+
+            <p>
+                LifeShield combines a wearable belt-based device with
+                a software platform to provide continuous monitoring
+                of selected patient information.
+            </p>
+
+            <p>
+                The belt is designed to be worn around the patient's
+                waist. Depending on the connected hardware,
+                physiological and movement-related information can
+                be collected and transmitted to the LifeShield
+                application.
+            </p>
+
+            <p class="mb-0">
+                When configured emergency conditions are detected,
+                the system can process the event and provide
+                relevant emergency information through the
+                configured alert workflow.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section id="how-it-works" style="background:white;">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>How LifeShield Works</h2>
+
+            <p>
+                The complete system follows a simple connected
+                workflow.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step-card">
+
+                <div class="step-number">01</div>
+
+                <h5>Wear</h5>
+
+                <p>
+                    Wear the LifeShield device securely around
+                    the waist according to the device's intended
+                    placement.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">02</div>
+
+                <h5>Connect</h5>
+
+                <p>
+                    Connect the assigned belt/device with the
+                    LifeShield monitoring system.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">03</div>
+
+                <h5>Monitor</h5>
+
+                <p>
+                    The connected system receives available
+                    health, movement and location information.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">04</div>
+
+                <h5>Respond</h5>
+
+                <p>
+                    Configured emergency conditions can trigger
+                    the LifeShield emergency response workflow.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     REGISTRATION
+========================================================= -->
+
+<section id="registration" class="registration-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>How to Register</h2>
+
+            <p>
+                Getting started with LifeShield is simple.
+                Follow these steps before using the monitoring system.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="registration-card">
+
+                    <div class="registration-number">
+                        01
+                    </div>
+
+                    <h5>Create Patient Account</h5>
+
+                    <p>
+                        Open Patient Registration and provide your
+                        name, email address, password and required
+                        medical information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="registration-card">
+
+                    <div class="registration-number">
+                        02
+                    </div>
+
+                    <h5>Get Your Patient ID</h5>
+
+                    <p>
+                        Your account is associated with a Patient
+                        or Belt ID that identifies the device and
+                        patient within the LifeShield system.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="registration-card">
+
+                    <div class="registration-number">
+                        03
+                    </div>
+
+                    <h5>Connect the Belt</h5>
+
+                    <p>
+                        Use the assigned LifeShield belt/device
+                        with the configured monitoring system.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="registration-card">
+
+                    <div class="registration-number">
+                        04
+                    </div>
+
+                    <h5>Login & Start</h5>
+
+                    <p>
+                        Log in using your registered credentials
+                        and access the patient dashboard.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BELT GUIDE
+========================================================= -->
+
+<section id="belt" class="belt-section">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-5">
+
+                <div class="hero-visual" style="min-height:400px;">
+
+                    <img
+                        src="{{ url_for('static', filename='images/lifeshield_belt.png') }}"
+                        alt="LifeShield wearable belt for waist monitoring"
+                        class="belt-image"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-7">
+
+                <div class="belt-info">
+
+                    <h3>
+                        How to Wear the LifeShield Belt
+                    </h3>
+
+                    <p class="text-muted mt-3">
+                        Correct placement is important for reliable
+                        operation of the wearable system.
+                    </p>
+
+
+                    <ul class="belt-list">
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <span>
+                                Wear the belt around the
+                                <strong>waist/abdomen</strong>.
+                            </span>
+                        </li>
+
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <span>
+                                Position the sensing module
+                                according to the hardware
+                                instructions.
+                            </span>
+                        </li>
+
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <span>
+                                Make sure the belt is secure
+                                without being unnecessarily tight.
+                            </span>
+                        </li>
+
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <span>
+                                Check that the device is powered
+                                and connected before use.
+                            </span>
+                        </li>
+
+
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            <span>
+                                Verify that the monitoring
+                                application receives the device
+                                data after connection.
+                            </span>
+                        </li>
+
+                    </ul>
+
+
+                    <div class="important-box">
+
+                        <strong>
+                            <i class="bi bi-exclamation-triangle"></i>
+                            Important:
+                        </strong>
+
+                        The LifeShield belt is intended to be
+                        worn around the waist. It should
+                        <strong>not be worn around the neck.</strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     TECHNOLOGY FLOW
+========================================================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>How the Technology Works</h2>
+
+            <p>
+                LifeShield connects the wearable device with
+                the monitoring platform through a simple data flow.
+            </p>
+
+        </div>
+
+
+        <div class="technology-flow">
+
+            <div class="tech-item">
+
+                <i class="bi bi-person-standing"></i>
+
+                <strong>Patient</strong>
+
+                <small class="d-block text-muted mt-2">
+                    Wears the device
+                </small>
+
+            </div>
+
+
+            <div class="tech-arrow">
+                →
+            </div>
+
+
+            <div class="tech-item">
+
+                <i class="bi bi-cpu"></i>
+
+                <strong>Sensors</strong>
+
+                <small class="d-block text-muted mt-2">
+                    Collect information
+                </small>
+
+            </div>
+
+
+            <div class="tech-arrow">
+                →
+            </div>
+
+
+            <div class="tech-item">
+
+                <i class="bi bi-watch"></i>
+
+                <strong>Belt</strong>
+
+                <small class="d-block text-muted mt-2">
+                    Device interface
+                </small>
+
+            </div>
+
+
+            <div class="tech-arrow">
+                →
+            </div>
+
+
+            <div class="tech-item">
+
+                <i class="bi bi-phone"></i>
+
+                <strong>Application</strong>
+
+                <small class="d-block text-muted mt-2">
+                    Displays information
+                </small>
+
+            </div>
+
+
+            <div class="tech-arrow">
+                →
+            </div>
+
+
+            <div class="tech-item">
+
+                <i class="bi bi-shield-check"></i>
+
+                <strong>LifeShield</strong>
+
+                <small class="d-block text-muted mt-2">
+                    Processes events
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MONITORING INFORMATION
+========================================================= -->
+
+<section style="background:white;">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>What the System Can Monitor</h2>
+
+            <p>
+                Depending on the connected hardware and configured
+                sensors, LifeShield can work with several types
+                of patient information.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="monitor-card">
+
+                    <div class="monitor-icon">
+                        <i class="bi bi-heart-pulse-fill"></i>
+                    </div>
+
+                    <h5>Heart Rate</h5>
+
+                    <p>
+                        Monitor heart-rate information received
+                        from the connected monitoring device.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="monitor-card">
+
+                    <div class="monitor-icon">
+                        <i class="bi bi-droplet-fill"></i>
+                    </div>
+
+                    <h5>SpO₂</h5>
+
+                    <p>
+                        Oxygen saturation information can be
+                        displayed when supported by the hardware.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="monitor-card">
+
+                    <div class="monitor-icon">
+                        <i class="bi bi-thermometer-half"></i>
+                    </div>
+
+                    <h5>Temperature</h5>
+
+                    <p>
+                        Temperature information can be received
+                        from compatible sensors.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="monitor-card">
+
+                    <div class="monitor-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+
+                    <h5>Location</h5>
+
+                    <p>
+                        GPS information can help determine the
+                        patient's current location when available.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EMERGENCY RESPONSE
+========================================================= -->
+
+<section class="emergency-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Emergency Response</h2>
+
+            <p>
+                LifeShield can process configured emergency
+                conditions and initiate the appropriate response
+                workflow.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="emergency-card">
+
+                    <i class="bi bi-person-falling"></i>
+
+                    <h5>Fall Detection</h5>
+
+                    <p>
+                        A configured fall event can be processed
+                        as an emergency condition.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="emergency-card">
+
+                    <i class="bi bi-exclamation-octagon"></i>
+
+                    <h5>SOS</h5>
+
+                    <p>
+                        A patient can initiate an emergency event
+                        using the available SOS functionality.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="emergency-card">
+
+                    <i class="bi bi-activity"></i>
+
+                    <h5>Health Alerts</h5>
+
+                    <p>
+                        Configured abnormal health readings can
+                        trigger the emergency workflow.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="emergency-card">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    <h5>Location Assistance</h5>
+
+                    <p>
+                        Available GPS coordinates can be included
+                        with emergency information.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOSPITAL ASSISTANCE
+========================================================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="hospital-box">
+
+            <div class="row align-items-center g-4">
+
+                <div class="col-md-2 text-center">
+
+                    <i class="bi bi-hospital hospital-icon"></i>
+
+                </div>
+
+
+                <div class="col-md-10">
+
+                    <h3>
+                        Hospital Assistance
+                    </h3>
+
+                    <p>
+                        LifeShield maintains a registered hospital
+                        database containing hospital names, phone
+                        numbers, addresses and geographical
+                        coordinates.
+                    </p>
+
+                    <p class="mb-0">
+                        When patient GPS coordinates are available,
+                        the system can calculate distances to the
+                        registered hospitals and identify the
+                        nearest available hospital in the database.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section style="background:white;">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Frequently Asked Questions</h2>
+
+            <p>
+                Everything you need to know before getting started.
+            </p>
+
+        </div>
+
+
+        <div class="accordion" id="faq">
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button
+                        class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq1">
+
+                        Who can use LifeShield?
+
+                    </button>
+
+                </h2>
+
+                <div
+                    id="faq1"
+                    class="accordion-collapse collapse show"
+                    data-bs-parent="#faq">
+
+                    <div class="accordion-body">
+
+                        LifeShield is designed as a patient
+                        monitoring and emergency-assistance
+                        platform for users who have a compatible
+                        LifeShield wearable device.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq2">
+
+                        Where should I wear the belt?
+
+                    </button>
+
+                </h2>
+
+                <div
+                    id="faq2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq">
+
+                    <div class="accordion-body">
+
+                        The LifeShield belt should be worn around
+                        the waist/abdomen according to the intended
+                        placement of the device. It should not be
+                        worn around the neck.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq3">
+
+                        Do I need to register before using LifeShield?
+
+                    </button>
+
+                </h2>
+
+                <div
+                    id="faq3"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq">
+
+                    <div class="accordion-body">
+
+                        Yes. A patient account and an assigned
+                        Patient/Belt ID are required to access the
+                        patient dashboard.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq4">
+
+                        What happens during an emergency?
+
+                    </button>
+
+                </h2>
+
+                <div
+                    id="faq4"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq">
+
+                    <div class="accordion-body">
+
+                        When a configured emergency condition is
+                        detected or an SOS event is initiated,
+                        LifeShield processes the event and starts
+                        the configured emergency alert workflow.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq5">
+
+                        Does LifeShield use GPS?
+
+                    </button>
+
+                </h2>
+
+                <div
+                    id="faq5"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq">
+
+                    <div class="accordion-body">
+
+                        Yes. When GPS coordinates are available,
+                        LifeShield can use them to determine the
+                        patient's location and assist with
+                        nearest-hospital identification.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq6">
+
+                        Is LifeShield a replacement for medical care?
+
+                    </button>
+
+                </h2>
+
+                <div
+                    id="faq6"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq">
+
+                    <div class="accordion-body">
+
+                        No. LifeShield is a monitoring and
+                        emergency-assistance system. It should not
+                        be considered a replacement for professional
+                        medical diagnosis, treatment or emergency
+                        services.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CALL TO ACTION
+========================================================= -->
+
+<section class="cta">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <h2>
+                Ready to Get Started?
+            </h2>
+
+            <p>
+                Create your patient account, connect your LifeShield
+                belt and access your personalized monitoring
+                dashboard.
+            </p>
+
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+
+                <a href="/register/patient"
+                   class="btn-primary-custom">
+
+                    <i class="bi bi-person-plus"></i>
+                    Register as Patient
+
+                </a>
+
+                <a href="/login"
+                   class="btn-outline-custom">
+
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Patient Login
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-brand">
+
+            <i class="bi bi-shield-plus"></i>
+            LIFE<span style="color:var(--secondary)">SHIELD</span>
+
+        </div>
+
+        <p class="footer-text">
+
+            A wearable patient safety and emergency monitoring
+            platform designed to connect patients with their
+            monitoring system when it matters most.
+
+        </p>
+
+
+        <div class="disclaimer">
+
+            <strong>Important Safety Notice:</strong>
+
+            LifeShield is intended as a monitoring and
+            emergency-assistance system. Information and alerts
+            generated by the system should not be considered
+            medical diagnosis or treatment. Always seek appropriate
+            professional medical assistance when required.
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 LifeShield. All rights reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
