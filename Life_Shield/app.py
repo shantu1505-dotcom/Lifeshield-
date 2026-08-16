@@ -19,10 +19,14 @@ app = Flask(__name__, template_folder=os.path.join(BASE_DIR, "templates"), stati
 app.secret_key = os.environ.get("LIFESHIELD_SECRET", "lifeshield-dev-secret")
 
 app.config["MYSQL_HOST"] = os.environ.get("MYSQL_HOST", "localhost")
+app.config["MYSQL_PORT"] = int(os.environ.get("MYSQL_PORT", "3306"))
 app.config["MYSQL_USER"] = os.environ.get("MYSQL_USER", "root")
 app.config["MYSQL_PASSWORD"] = os.environ.get("MYSQL_PASSWORD", "")
 app.config["MYSQL_DB"] = os.environ.get("MYSQL_DB", "lifeshield_db")
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
+# Aiven (and most cloud MySQL providers) require SSL. Skip for plain localhost dev.
+if app.config["MYSQL_HOST"] != "localhost":
+    app.config["MYSQL_SSL"] = {"ssl": {"ssl-mode": "REQUIRED"}}
 mysql = MySQL(app)
 
 # FIX 1: Added missing Twilio / Google / Ntfy configs
